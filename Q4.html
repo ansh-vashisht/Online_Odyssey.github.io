@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Odyssey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 20px;
+            margin: 10px;
+        }
+        .question {
+            font-size: 24px;
+        }
+        .answer-input {
+            padding: 10px;
+            font-size: 20px;
+        }
+        #score {
+            font-size: 24px;
+        }
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .correct-answer {
+            background-color: green;
+        }
+        .wrong-answer {
+            background-color: red;
+        }
+        .navigation-arrows {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .navigation-arrows a {
+            font-size: 36px;
+            padding: 5px 20px;
+            border-radius: 5px;
+        }
+        .navigation-arrows a.prev {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        .navigation-arrows a.next {
+            background-color: #007BFF;
+            color: #fff;
+        }
+    </style>
+ </style>
+</head>
+<body>
+    <header>
+        <h1>Online Odyssey</h1>
+    </header>
+    <div class="container">
+        <p class="question">Question 4." In 1970, FIFA World Cup was hosted in Mexico. Out of 79 teams, only 16 teams qualified for the tournament. One of the nail-biting Quarter Finals was held between West Germany and England. England was leading 2-1 in the match. At the 82nd minute of play, Uwe Seeler, the striker for Germany, scored an equalizer, and another goal from his counterpart helped them win the match."</p><br><br>
+      
+        <div>
+            <label for="answer" class="question">Enter your answer:</label>
+            <input type="text" id="answer" class="answer-input">
+            <button id="submit">Submit</button>
+        </div>
+        <div id="result"></div>
+     
+        <div class="navigation-arrows">
+            <a href="Q3.html" class="prev">←</a>
+            <a href="Q5.html" class="next">→</a>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = ["FOR","USE","RA51","MUTATED"]; // Add other correct answers for subsequent questions
+        let score = 0;
+        let currentQuestion = 0;
+        let userAnswers = [];
+
+        const resultMessage = document.getElementById("result");
+        const currentScoreDisplay = document.getElementById("current-score");
+        const totalScoreDisplay = document.getElementById("total-score");
+        const answerInput = document.getElementById("answer");
+        const submitButton = document.getElementById("submit");
+
+        function checkAnswer() {
+            const userAnswer = answerInput.value;
+            resultMessage.classList.remove("correct-answer", "wrong-answer");
+
+            if (userAnswer === correctAnswers[currentQuestion]) {
+                resultMessage.innerHTML = "Correct!";
+                resultMessage.classList.add("correct-answer");
+                userAnswers[currentQuestion] = true;
+                score += 50;
+                currentScoreDisplay.innerHTML = `Current Question Score: 50`;
+                totalScoreDisplay.innerHTML = `Total Score: ${score}`;
+            } else {
+                resultMessage.innerHTML = "Incorrect. Try again.";
+                resultMessage.classList.remove("correct-answer");
+                resultMessage.classList.add("wrong-answer");
+                userAnswers[currentQuestion] = false;
+            }
+        }
+
+        submitButton.addEventListener("click", checkAnswer);
+
+        answerInput.addEventListener("input", () => {
+            resultMessage.innerHTML = "";
+            resultMessage.classList.remove("correct-answer", "wrong-answer");
+        });
+
+       
+    </script>
+</body>
+</html>
